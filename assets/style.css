@@ -13,6 +13,6 @@ body {
 
 /* OCULTANDO A CLASSE MODELS */
 .models {
-    display: none;
+    display: flex;
 }
 
