@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EEE;
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    display: flex;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* OCULTANDO A CLASSE MODELS */
+.models {
+    display: none;
+}
+
