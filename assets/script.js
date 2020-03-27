@@ -1,6 +1,7 @@
 const sel = (elemento) => document.querySelector(elemento);
 const selAll = (elemento) => document.querySelectorAll(elemento);
 
+let modalQt = 1;
 
 pizzaJson.map((item, index) => {    
     let pizzaItem = sel('.models .pizza-item').cloneNode(true);
@@ -13,10 +14,12 @@ pizzaJson.map((item, index) => {
     pizzaItem.querySelector('.pizza-item--name').innerHTML = item.name;
     pizzaItem.querySelector('.pizza-item--desc').innerHTML = item.description;
 
-    //ABERTURA DE MODAL
+    //LISTAGEM DAS PIZZAS
     pizzaItem.querySelector('a').addEventListener('click', (e) => {
         
         e.preventDefault(); // bloqueando ação padrão da tag
+
+        modalQt = 1 // setando o valor 1 novamente ao abrir
 
         //pegando index da pizza clicada
         let key = e.target.closest('.pizza-item').getAttribute('data-key');
@@ -25,7 +28,21 @@ pizzaJson.map((item, index) => {
         sel('.pizzaBig img').src = pizzaJson[key].img;
         sel('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
         sel('.pizzaInfo .pizzaInfo--desc').innerHTML = pizzaJson[key].description;
+        sel('.pizzaInfo--actualPrice').innerHTML = `R$ ${pizzaJson[key].price.toFixed(2)}`;
 
+        sel('.pizzaInfo--size.selected').classList.remove('selected');
+        
+        selAll('.pizzaInfo--size').forEach((size, sizeIndex) => {
+            if(sizeIndex == 0) {
+                size.classList.add('selected');
+            }
+
+            size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
+        });
+
+
+        //colocando a quantidade de pizzas
+        sel('.pizzaInfo--qt').innerHTML = modalQt;
       
         // colocando efeito para a abertura do modal
         sel('.pizzaWindowArea').style.opacity = 0;
@@ -34,4 +51,17 @@ pizzaJson.map((item, index) => {
     });
 
     sel('.pizza-area').append(pizzaItem);
+});
+
+
+//EVENTOS DO MODAL
+function closeModal(){
+    sel('.pizzaWindowArea').style.opacity = 0;
+    setTimeout( () => {
+        sel('.pizzaWindowArea').style.display = 'none';    
+    }, 500);
+};
+
+selAll('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach((item)=>{
+    item.addEventListener('click', closeModal);
 });
