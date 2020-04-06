@@ -33,7 +33,7 @@ pizzaJson.map((item, index) => {
         sel('.pizzaInfo--size.selected').classList.remove('selected');
         
         selAll('.pizzaInfo--size').forEach((size, sizeIndex) => {
-            if(sizeIndex == 0) {
+            if(sizeIndex == 1) {
                 size.classList.add('selected');
             }
 
@@ -64,4 +64,26 @@ function closeModal(){
 
 selAll('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach((item)=>{
     item.addEventListener('click', closeModal);
+});
+
+//MANIPULANDO AS QUANTIDADES DE SELEÇÃO
+sel('.pizzaInfo--qtmenos').addEventListener('click', () => {
+    //verificando se quantidade de pizzas é maior que 1 para fazer redução
+    if(modalQt > 1) {
+        modalQt--; 
+        sel('.pizzaInfo--qt').innerHTML = modalQt; //colocando a quantidade de pizzas      
+    }
+    
+});
+sel('.pizzaInfo--qtmais').addEventListener('click', () => {
+    modalQt++;
+    sel('.pizzaInfo--qt').innerHTML = modalQt; //colocando a quantidade de pizzas      
+});
+
+//SELECIONANDO AS OPÇÕES DA PIZZA
+selAll('.pizzaInfo--size').forEach((size, sizeIndex) => {
+    size.addEventListener('click', (e) => {
+        sel('.pizzaInfo--size.selected').classList.remove('selected');
+        size.classList.add('selected');
+    });
 });
