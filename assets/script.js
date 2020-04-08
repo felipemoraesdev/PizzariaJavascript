@@ -2,6 +2,8 @@ const sel = (elemento) => document.querySelector(elemento);
 const selAll = (elemento) => document.querySelectorAll(elemento);
 
 let modalQt = 1;
+let cart = [];
+let modalKey = 0;
 
 pizzaJson.map((item, index) => {    
     let pizzaItem = sel('.models .pizza-item').cloneNode(true);
@@ -54,7 +56,8 @@ pizzaJson.map((item, index) => {
 });
 
 
-//EVENTOS DO MODAL
+// ***** EVENTOS DO MODAL *****
+//FECHANDO A JANELA
 function closeModal(){
     sel('.pizzaWindowArea').style.opacity = 0;
     setTimeout( () => {
@@ -87,3 +90,44 @@ selAll('.pizzaInfo--size').forEach((size, sizeIndex) => {
         size.classList.add('selected');
     });
 });
+
+//ADICIONANDO AO CARRINHO DE COMPRAS
+sel('.pizzaInfo--addButton').addEventListener('click',  () => {
+    let size = parseInt(sel('.pizzaInfo--size.selected').getAttribute('data-key'));
+
+    //criando identificador de sabor e tamanho
+    let identfier = pizzaJson[ modalKey ].id + '@' + size;
+
+    //verificando se ja existe pizza com mesmo identificador no array
+    let key = cart.findIndex((item) => item.identfier == identfier);
+    if (key > -1) {
+        //aumentando a quantidade do item encontrado
+        cart[key].qt += modalQt;
+    } else {
+        //adicionando novo item
+        cart.push({
+            id : pizzaJson[ modalKey ].id,
+            size,
+            qt : modalQt
+        });
+    }    
+
+    closeModal();
+    updateCart();
+    
+});
+
+// ***** AÇÕES DO CARRINHO DE COMPRAS *****
+//funcão de atualização
+function updateCart(){
+    if (cart.length > 0) {
+        sel('aside').classList.add('show'); //adiciona class que exibe o carrinho
+
+        //buscando informações da pizza
+        for(let i in cart) {
+            let pizzaItem = pizzaJson.find((item) => item.id == cart[i].id);                             
+        }
+    } else {
+        sel('aside').classList.remove('show');
+    }
+}
