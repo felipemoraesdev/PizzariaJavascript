@@ -21,15 +21,15 @@
 
 ## 📖 Sobre 
 
-Este site foi desenvolvido utlizando javascript para a exibição e ações de todo o layout, ele simula um site de compras de pizzas online.
+Este site foi desenvolvido como projeto final de JavaScript no curso de Desenvolvedor Fullstack da B7Web com o professor Bonieky Lacerda, durante este módulo do curso foi passado os principais conceitos do JavaScript, bem como sua aplicação prática e manipulação da DOM.
 
 ---
 
 ## 🚀 Tecnologias utilizadas
 O projeto está sendo desenvolvido com as seguintes tecnologias:
-- HTML5
-- CSS3
+- CSS
 - JavaScript
+- HTML
 
 ---
 
