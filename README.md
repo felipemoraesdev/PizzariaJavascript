@@ -1,5 +1,5 @@
 <h1 align="center">
-  Pizzaria Javascript
+  Pizzaria JavaScript
 </h1>
 
 ## 📋 Índice
